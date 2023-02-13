@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { replaceZip, selectZip } from './LocationSlice';
-import { WeatherCard } from '../Weather/WeatherCard';
+import { Weather } from '../Weather/Weather';
 // Consider making dropdown menu for country selection
 
 export const LocationForm: React.FC = ({}) => {
   const dispatch = useAppDispatch();
   const zipSelector = useAppSelector(selectZip);
+  const [toggle, setToggle] = useState(false);
   const [location, setLocation] = useState('');
 
   return (
@@ -26,7 +27,7 @@ export const LocationForm: React.FC = ({}) => {
       >
         Submit
       </button>
-      {zipSelector ? <WeatherCard zipcode={zipSelector} /> : null}
+      {zipSelector ? <Weather /> : null}
     </div>
   );
 };
