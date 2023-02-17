@@ -1,3 +1,9 @@
+export interface WeatherFetch {
+  data: WeatherType;
+  loading: 'idle ' | 'pending ' | 'fulfilled ' | 'rejected';
+  error: [];
+}
+
 export interface WeatherType {
   base: string;
   clouds: { all: number };

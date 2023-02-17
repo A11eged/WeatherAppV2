@@ -82,3 +82,23 @@ export const getDataOneMove = <T extends unknown>(url: string) => {
 
   return { data: data };
 };
+
+// export const getWeatherData2 = () => {
+//   const [weather, setWeather] = useState();
+
+//   useEffect(() => {
+//     const getWeatherData = () => {
+//       fetch('/weather/data')
+//         .catch((err) => {
+//           throw new TypeError('Errors getting the weather', err);
+//         })
+//         .then((response) => {
+//           if (response.data && response.success) {
+//             setWeather(response.data);
+//           }
+//         });
+//     };
+
+//     getWeatherData();
+//   }, []);
+// };
