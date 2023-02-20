@@ -4,12 +4,8 @@ import { WeatherType } from '../../app/models';
 import { addWeather } from './WeatherSlice';
 
 export const Weather = () => {
-  console.log(addWeather());
-  return (
-    <div>
-      <button>Test</button>
-    </div>
-  );
+  addWeather();
+  return <div></div>;
 };
 
 // import {
