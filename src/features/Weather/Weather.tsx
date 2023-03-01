@@ -10,11 +10,9 @@ import { Base } from './Values/Base';
 // Container for Weather
 export const Weather = () => {
   return (
-    <div>
-      <div className="weather">
-        <Base />
-        <Clouds />
-      </div>
+    <div className="weather-container">
+      <Base />
+      <Clouds />
     </div>
   );
 };

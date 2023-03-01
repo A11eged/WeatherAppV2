@@ -6,6 +6,8 @@ export enum Status {
 }
 
 export type RequestState = {
+  // weatherArray: WeatherType[];
+  // addWeatherArray: (v: WeatherType) => void;
   value: WeatherType;
   setValue: (v: WeatherType) => void;
   errors: string[];
