@@ -1,3 +1,4 @@
+// Unneeded
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LocationType } from '../../app/models';
 import { RootState } from '../../app/store';
@@ -29,8 +30,3 @@ export const locationSlice = createSlice({
     },
   },
 });
-
-export const { setLocation, replaceName, replaceZip } = locationSlice.actions;
-export const selectName = (state: RootState) => state.location.name;
-export const selectZip = (state: RootState) => state.location.zipcode;
-export default locationSlice.reducer;
