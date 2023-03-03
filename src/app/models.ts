@@ -8,7 +8,7 @@ export enum Status {
 export type RequestState = {
   // weatherArray: WeatherType[];
   // addWeatherArray: (v: WeatherType) => void;
-  value: WeatherType;
+  value: WeatherType[];
   setValue: (v: WeatherType) => void;
   errors: string[];
   setErrors: (e: string[]) => void;
@@ -35,7 +35,6 @@ export interface WeatherType {
   };
   sys: {
     country: string;
-    id: number;
     sunrise: number;
     sunset: number;
     type: number;
@@ -64,7 +63,6 @@ export const initialWeather = {
   },
   sys: {
     country: '',
-    id: 0,
     sunrise: 0,
     sunset: 0,
     type: 0,

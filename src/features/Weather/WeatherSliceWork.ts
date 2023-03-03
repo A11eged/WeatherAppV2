@@ -15,8 +15,8 @@ import {
 } from '../Weather/WeatherFetchHelpers';
 
 // Take Weather Object and return a Promise that resolves to Weather Object
-export const addWeather = createAsyncThunk(
-  'weather/addWeather',
+export const fillLocation = createAsyncThunk(
+  'weather/fillLocation',
   (zipcode: string) => {
     return fetch(getEndpointZipcode(plain_endpoint, zipcode), {
       method: 'GET',
@@ -29,8 +29,8 @@ export const addWeather = createAsyncThunk(
   }
 );
 
-export const addWeatherCoordinates = createAsyncThunk(
-  'weather/addWeatherCoordinates',
+export const addWeather = createAsyncThunk(
+  'weather/addWeather',
   (zipcode: string) => {
     return fetch(getEndpointZipcode(plain_endpoint, zipcode), {
       method: 'GET',
@@ -53,55 +53,60 @@ export const addWeatherCoordinates = createAsyncThunk(
   }
 );
 
+const weatherArray: WeatherType[] = [];
+
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
-    weather: [] as WeatherType[],
-    id: 0,
+    REQID: 0,
+    weather: [initialWeather] as WeatherType[],
     errors: [] as string[],
     status: Status.idle,
   },
   reducers: {
-    addWeather(state, action) {
-      state.weather[state.id] = action.payload;
-      state.id++;
+    getWeather(state, action) {
+      // First is weather[0]
+      console.log(state.weather[0].base);
+      console.log(state);
+      state.weather = action.payload;
     },
+    PREPEND_WEATHER(state, action) {
+      return {
+        ...state,
+        weather: [action.payload, ...state.weather],
+      };
+    },
+    APPEND_WEATHER(state, action) {
+      return {
+        ...state,
+        weather: [...state.weather, action.payload],
+      };
+    },
+    DELETE_WEATHER(state, action) {
+      return {
+        // Develop
+        ...state,
+      };
+    },
+
     logWeather(state) {
       state.weather = { ...state.weather };
       console.log(state.weather);
     },
-    setName: (state, action: PayloadAction<string>) => {
-      state.weather[state.id].name = action.payload;
-    },
-    setZipcode: (state, action: PayloadAction<string>) => {
-      state.weather.zipcode = action.payload;
-    },
   },
   extraReducers: (builder) => {
-    // Async Thunk for addWeather
+    // Async Thunk for Coordinates
     builder.addCase(addWeather.pending, (state) => {
       state.status = Status.loading;
     });
     builder.addCase(addWeather.fulfilled, (state, action) => {
       state.status = Status.success;
-      state.weather = action.payload;
+      state.weather.push(action.payload);
       console.log('Success!');
+      console.log(state.weather[state.REQID].base);
+      ++state.REQID;
     });
     builder.addCase(addWeather.rejected, (state, action) => {
-      state.status = Status.failed;
-      console.log(action.error.message);
-      state.errors.push(action.error.message ?? 'Unknown Error');
-    });
-    // Async Thunk for Coordinates
-    builder.addCase(addWeatherCoordinates.pending, (state) => {
-      state.status = Status.loading;
-    });
-    builder.addCase(addWeatherCoordinates.fulfilled, (state, action) => {
-      state.status = Status.success;
-      state.weather = action.payload;
-      console.log('Success!');
-    });
-    builder.addCase(addWeatherCoordinates.rejected, (state, action) => {
       state.status = Status.failed;
       console.log(action.error.message);
       state.errors.push(action.error.message ?? 'Unknown Error');
@@ -109,8 +114,7 @@ export const weatherSlice = createSlice({
   },
 });
 
-export const { logWeather, initWeather, setZipcode, setName } =
-  weatherSlice.actions;
-export const selectWeather = (state: RootState) => state.weather.weather;
-export const selectZip = (state: RootState) => state.weather.weather.zipcode;
+export const { logWeather, getWeather } = weatherSlice.actions;
+export const selectWeather = (state: RootState) => state.weather;
+export const selectZip = (state: RootState) => state.weather.weather[0].zipcode;
 export default weatherSlice.reducer;

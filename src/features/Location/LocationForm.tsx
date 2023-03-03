@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-import { addWeatherCoordinates } from '../Weather/WeatherSlice';
+// import { addWeather } from '../Weather/WeatherSlice';
+import { addWeather } from '../Weather/WeatherSliceWork';
 
 export const LocationForm: React.FC = ({}) => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ export const LocationForm: React.FC = ({}) => {
       <input value={location} onChange={(e) => setLocation(e.target.value)} />
       <button
         onClick={() => {
-          dispatch(addWeatherCoordinates(location));
+          dispatch(addWeather(location));
         }}
       >
         Submit

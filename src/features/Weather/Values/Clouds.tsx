@@ -22,8 +22,8 @@ export const Clouds = () => {
   // Use Framer to make clouds move at the speed of wind
   const { value } = useWeatherContext();
   const weatherSelector = useAppSelector(selectWeather);
-  const clouds = weatherSelector.clouds.all;
-  const wind = weatherSelector.wind.speed;
+  const clouds = weatherSelector[0].clouds.all;
+  const wind = weatherSelector[0].wind.speed;
 
   return (
     <div>

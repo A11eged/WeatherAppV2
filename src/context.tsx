@@ -9,7 +9,7 @@ import {
 } from './app/models';
 
 export const WeatherContext = createContext<RequestState>({
-  value: initialWeather,
+  value: [initialWeather] as WeatherType[],
   setValue: () => {},
   status: Status.idle,
   setStatus: () => {},
