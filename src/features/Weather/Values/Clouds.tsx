@@ -18,18 +18,14 @@ export const Example = () => (
   />
 );
 
-export const Clouds = () => {
+export const Clouds = ({ id }) => {
   // Use Framer to make clouds move at the speed of wind
   const { value } = useWeatherContext();
   const weatherSelector = useAppSelector(selectWeather);
-  const clouds = weatherSelector[0].clouds.all;
-  const wind = weatherSelector[0].wind.speed;
-
+  const clouds = weatherSelector.WeatherList[id].clouds.all;
   return (
     <div>
-      <div className="clouds">
-        {clouds ? clouds : 'Clouds: ' + value.clouds.all}
-      </div>
+      <div className="clouds">{clouds ? clouds : 'Clouds: ' + clouds}</div>
     </div>
   );
 };

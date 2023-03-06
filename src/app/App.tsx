@@ -7,7 +7,7 @@ import { LocationForm } from '../features/Location/LocationForm';
 import { initialWeather, Status, WeatherType } from '../app/models';
 import { Weather } from '../features/Weather/Weather';
 import { selectZip } from '../features/Weather/WeatherSlice';
-
+import { WeatherList } from '../features/Weather/WeatherList/WeatherList';
 function App() {
   const [value, setValue] = useState<WeatherType>(initialWeather);
   const [errors, setErrors] = useState<string[]>([]);
@@ -19,8 +19,9 @@ function App() {
       {/* Some Search for Location */}
       {/* Location Form Accepts Location from User, Updates Input to State*/}
       <LocationForm />
+      <WeatherList />
       {/* Use Inputed from Location Form to Fetch */}
-      {<Weather />}
+      {/* {<Weather />} */}
       {/* Display Weather Data */}
     </WeatherContext.Provider>
   );

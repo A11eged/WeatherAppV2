@@ -8,7 +8,9 @@ export enum Status {
 export type RequestState = {
   // weatherArray: WeatherType[];
   // addWeatherArray: (v: WeatherType) => void;
-  value: WeatherType[];
+  // REQID: number[];
+  // addREQID: (v: number) => void;
+  value: WeatherType;
   setValue: (v: WeatherType) => void;
   errors: string[];
   setErrors: (e: string[]) => void;
@@ -16,7 +18,10 @@ export type RequestState = {
   setStatus: (s: Status) => void;
 };
 
+export type WeatherList = WeatherType[];
 export interface WeatherType {
+  // index will be used to index and delete
+  index: number;
   base: string;
   clouds: { all: number };
   cod: number;
@@ -45,6 +50,7 @@ export interface WeatherType {
 }
 
 export const initialWeather = {
+  index: 0,
   base: '',
   clouds: { all: 0 },
   cod: 0,

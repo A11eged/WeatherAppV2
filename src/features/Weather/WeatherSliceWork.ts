@@ -58,7 +58,7 @@ const weatherArray: WeatherType[] = [];
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
-    REQID: 0,
+    REQID: [] as number[],
     weather: [initialWeather] as WeatherType[],
     errors: [] as string[],
     status: Status.idle,
@@ -100,11 +100,12 @@ export const weatherSlice = createSlice({
       state.status = Status.loading;
     });
     builder.addCase(addWeather.fulfilled, (state, action) => {
+      let i: number = 0;
       state.status = Status.success;
       state.weather.push(action.payload);
       console.log('Success!');
-      console.log(state.weather[state.REQID].base);
-      ++state.REQID;
+      state.REQID.push(i);
+      ++i;
     });
     builder.addCase(addWeather.rejected, (state, action) => {
       state.status = Status.failed;
@@ -115,6 +116,5 @@ export const weatherSlice = createSlice({
 });
 
 export const { logWeather, getWeather } = weatherSlice.actions;
-export const selectWeather = (state: RootState) => state.weather;
-export const selectZip = (state: RootState) => state.weather.weather[0].zipcode;
+export const selectWeather = (state: RootState) => state.weatherList;
 export default weatherSlice.reducer;
